@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -150,21 +151,43 @@ public class NotepadGUI extends JFrame implements ActionListener{
 		
 		ta_text = new JTextArea();
 		scrollPane.setViewportView(ta_text);
+		
+		ta_text.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(!getTitle().contains("*")){
+					setTitle(getTitle() + "(*)");
+				}
+			}
+		});
 	}//constructor
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
+
+		if(source == mi_file_open){
+			String text = mgr.file_open(this);
+			ta_text.setText(text);
+			setTitle(mgr.getFileName() + " - 후니메모장");
+		}//open
+		
+		if(source == mi_file_save){
+			String result = mgr.file_save(getTitle(), ta_text.getText(), this);
+			if(result != null){
+				setTitle(result + " - 후니메모장");
+			}
+		}//save
+		
 		if(source == mi_file_exit){
-			mgr.file_exit(ta_text.getText(), this);
-		}
-		
-		
+			mgr.file_exit(getTitle(), ta_text.getText(), this);
+		}//exit
 		
 		
 		if(source == mi_help_info){
 			mgr.mi_help_info(this);
-		}
+		}//info
+		
 	}//actionPerformed()
 
 }//class
