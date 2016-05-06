@@ -168,8 +168,10 @@ public class NotepadGUI extends JFrame implements ActionListener{
 
 		if(source == mi_file_open){
 			String text = mgr.file_open(this);
-			ta_text.setText(text);
-			setTitle(mgr.getFileName() + " - 후니메모장");
+			if(text != ""){
+				ta_text.setText(text);
+				setTitle(mgr.getFileName() + " - 후니메모장");
+			}
 		}//open
 		
 		if(source == mi_file_save){
