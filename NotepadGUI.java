@@ -40,6 +40,17 @@ public class NotepadGUI extends JFrame implements ActionListener{
 	private JSeparator separator_2;
 	private JMenuItem mi_help_info;
 	private NotepadManager mgr = new NotepadManager();
+	private NotepadShortcuts shortcuts = new NotepadShortcuts();
+	private JMenu menu_edit;
+	private JMenuItem mi_undo;
+	private JSeparator separator_3;
+	private JMenuItem mi_tear;
+	private JMenuItem mi_copy;
+	private JMenuItem mi_paste;
+	private JMenuItem mi_delete;
+	private JSeparator separator_4;
+	
+	private String box; //복붙잘라내기 할 때 저장되는 공간
 
 	/**
 	 * Launch the application.
@@ -125,6 +136,46 @@ public class NotepadGUI extends JFrame implements ActionListener{
 		mi_file_exit.setMnemonic('x');
 		menu_file.add(mi_file_exit);
 		
+		menu_edit = new JMenu("\uD3B8\uC9D1(E)");
+		menu_edit.setMnemonic('e');
+		menuBar.add(menu_edit);
+		
+		mi_undo = new JMenuItem("\uC2E4\uD589\uCDE8\uC18C(U)");
+		mi_undo.addActionListener(this);
+		mi_undo.setMnemonic('u');
+		mi_undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
+		menu_edit.add(mi_undo);
+		
+		separator_3 = new JSeparator();
+		menu_edit.add(separator_3);
+		
+		mi_tear = new JMenuItem("\uC798\uB77C\uB0B4\uAE30(T)");
+		mi_tear.addActionListener(this);
+		mi_tear.setMnemonic('t');
+		mi_tear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+		menu_edit.add(mi_tear);
+		
+		mi_copy = new JMenuItem("\uBCF5\uC0AC(C)");
+		mi_copy.addActionListener(this);
+		mi_copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
+		mi_copy.setMnemonic('c');
+		menu_edit.add(mi_copy);
+		
+		mi_paste = new JMenuItem("\uBD99\uC5EC\uB123\uAE30(P)");
+		mi_paste.addActionListener(this);
+		mi_paste.setMnemonic('p');
+		mi_paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK));
+		menu_edit.add(mi_paste);
+		
+		mi_delete = new JMenuItem("\uC0AD\uC81C(L)");
+		mi_delete.addActionListener(this);
+		mi_delete.setMnemonic('l');
+		mi_delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0));
+		menu_edit.add(mi_delete);
+		
+		separator_4 = new JSeparator();
+		menu_edit.add(separator_4);
+		
 		menu_help = new JMenu("\uB3C4\uC6C0\uB9D0(H)");
 		menu_help.setMnemonic('h');
 		menuBar.add(menu_help);
@@ -158,7 +209,7 @@ public class NotepadGUI extends JFrame implements ActionListener{
 				if(!getTitle().contains("*")){
 					setTitle(getTitle() + "(*)");
 				}
-			}
+			}//keyTyped()
 		});
 	}//constructor
 
