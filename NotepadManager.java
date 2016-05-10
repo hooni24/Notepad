@@ -25,7 +25,7 @@ public class NotepadManager {
 				br = new BufferedReader(new FileReader(file));
 				String c;
 				while((c = br.readLine()) != null){
-					text += c+"\n";
+					text += c+"\r\n";
 				}
 																	//이 시점에서 백스페이스 한번 해야 함. 문서 끝에서 줄바꿈이 일어나고 있으므로.
 			} catch (FileNotFoundException e) {
@@ -37,6 +37,9 @@ public class NotepadManager {
 		return text;
 	}//file_open()
 
+	
+	//저장 할 때 split으로 나눠서 /r/n을 문장 사이사이에 집어 넣어 주고, 불러올때는 그냥 불러온다.
+	
 	public String file_save(String title, String text, JFrame frame){
 		String result = null;
 		if(!title.contains(".txt")){

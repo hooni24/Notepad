@@ -50,27 +50,6 @@ public class NotepadGUI extends JFrame implements ActionListener{
 	private JMenuItem mi_delete;
 	private JSeparator separator_4;
 	
-	private String box; //복붙잘라내기 할 때 저장되는 공간
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NotepadGUI frame = new NotepadGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public NotepadGUI() {
 		setTitle("\uC81C\uBAA9\uC740 \uAC70\uB4E4\uBFD0 - \uD6C4\uB2C8\uBA54\uBAA8\uC7A5");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -211,6 +190,8 @@ public class NotepadGUI extends JFrame implements ActionListener{
 				}
 			}//keyTyped()
 		});
+		
+		setVisible(true);
 	}//constructor
 
 	@Override
